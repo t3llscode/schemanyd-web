@@ -1,0 +1,102 @@
+/* Styles for home page visual (moved into src/styles as Home.module.scss) */
+.page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(13, 17, 22); /* match globals.css background */
+	color: #e6eef8;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  /* background removed */
+  gap: 0; /* tight stack */
+  margin-bottom: 7vh; /* shift logo and cube up by ~1/4 of their combined height */
+}
+
+.logo {
+  width: min(64vw, 680px);
+  max-width: 720px;
+  height: auto;
+  display: block;
+  margin-top: 1.5rem; /* push logo down slightly so cube sits on top visually */
+}
+
+/* cube sits physically above the logo in the flexbox stack */
+.cube {
+  width: min(18vw, 140px);
+  height: auto;
+  will-change: transform, opacity;
+  animation: float 1.8s ease-in-out infinite;
+  pointer-events: none;
+  order: -1; /* ensure cube renders above logo in vertical stack */
+}
+
+@keyframes float {
+	0% {
+		transform: translateY(0);
+		opacity: 0.95;
+	}
+	50% {
+		transform: translateY(-18px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 0.95;
+	}
+}
+
+.github {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 1.2rem; /* increased horizontal padding to prevent icon cutoff */
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 999px;
+  color: #e6eef8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.18s ease, background 0.18s ease;
+  z-index: 20;
+  max-width: 90vw; /* allow badge to grow wider for longer text */
+}
+
+.github span {
+  white-space: nowrap; /* prevent awkward mid-phrase wrapping */
+  overflow: visible;
+}.github:hover {
+	transform: translateX(-50%) translateY(-4px);
+	background: rgba(79,70,229,0.12);
+}
+
+.ghIcon { color: #e6eef8; opacity: 0.95; }
+
+/* smaller check/progress icon next to the GitHub mark */
+.checkIcon {
+	color: #a7f3d0; /* mint-ish accent for the check */
+	opacity: 0.98;
+	margin-right: 0.45rem;
+}
+
+@media (max-width: 640px) {
+	.cube { width: 92px; }
+	.logo { width: 88vw; }
+	.github { bottom: 18px; font-size: 0.9rem; }
+}
